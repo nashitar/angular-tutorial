@@ -1,0 +1,62 @@
+<h2>Products</h2>
+
+<!-- display list of product names -->
+<!-- *ngFor iterates over the predefined list of products -->
+<!-- *ngFor directive assigns each index in the products array to the productId variable when iterating over the list. -->
+
+<div *ngFor="let product of products; index as productId">
+
+  <h3>
+    <!-- interpolation syntax {{ }} is used to display the names of the products  -->
+
+    <!-- write <a> element -->
+    <!-- property binding [ ] lets you use the property value in a template expression -->
+    <!-- makes each product name a link to product details -->
+
+    <!-- the product name anchor includes a routerLink. -->
+    
+    <a [title]="product.name + ' details'" [routerLink]="['/products', productId]">
+      {{ product.name }}
+    </a>
+
+  </h3>
+
+
+  <!-- add product desriptions -->
+  <!-- use *ngIf directive so that paragraph element is only created if the product has a description -->
+
+  <p *ngIf="product.description">
+    Description: {{ product.description }}
+  </p>
+
+
+  <!-- add a button so users can share products  -->
+  <!-- bind the button's click event to the share() method -->
+  <!-- event binding uses a set of parentheses, ( ), around the event -->
+
+  <button (click)="share()">
+    Share
+  </button>
+  
+  
+  <!-- display the new product alert component as a child of the product list -->
+  <!-- new product alert component takes a product as input from the product list and shows or hides the "Notify Me" button -->
+
+  <app-product-alerts
+    [product]="product"
+    (notify)="onNotify()">
+  </app-product-alerts>
+
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
+
+
+<!-- components notes -->
+<!-- component classes handle data and functionality. the product data and the share() method in the component class handle data and functionality, respectively -->
+<!-- the html template determines the UI.the product list's HTML template displays the name, description, and a "Share" button for each product -->
+<!-- component specific styles: product list does not define any styles, but this is where component CSS resides -->
